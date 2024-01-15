@@ -2,12 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Section: React.FC = () => {
   const [selected, setSelected] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null); // Specify the type of the ref as HTMLDivElement
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Specify the type of the event parameter as MouseEvent
     const handleClickOutside = (event: MouseEvent) => {
-      // Type guard to ensure event.target is a Node
       if (
         sectionRef.current &&
         event.target instanceof Node &&
@@ -16,24 +14,22 @@ const Section: React.FC = () => {
         setSelected(false);
       }
     };
-
-    // Add event listener
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Clean up the event listener
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  console.log(selected);
   return (
     <div
-      ref={sectionRef} // Attach the ref to the div
+      ref={sectionRef}
       onClick={() => {
         setSelected(true);
       }}
       className={`${
         selected && "border-blue-500"
-      }  cursor-pointer hover:border-blue-500 border-1 border-white text-center w-3/4 m-auto py-16 mt-4 bg-gray-50`}
+      }  cursor-pointer hover:border-blue-500 border-1 text-center w-3/4 m-auto py-16 mt-4 bg-gray-50`}
     >
       Section
     </div>
